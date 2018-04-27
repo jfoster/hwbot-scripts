@@ -1,3 +1,7 @@
+If (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]"Administrator")) {
+	Start-Process powershell.exe "-NoProfile -ExecutionPolicy Bypass -File `"$PSCommandPath`" $PSCommandArgs" -WorkingDirectory $pwd -Verb RunAs
+	Exit
+}
 Set-Service "AxInstSV" -StartupType Manual 
 Set-Service "AJRouter" -StartupType Disabled 
 Set-Service "AppReadiness" -StartupType Manual 
@@ -7,7 +11,7 @@ Set-Service "ALG" -StartupType Disabled
 Set-Service "AppMgmt" -StartupType Disabled 
 Set-Service "AppXSVC" -StartupType Manual 
 Set-Service "tzautoupdate" -StartupType Disabled 
-Set-Service "BITS" -StartupType Automatic 
+Set-Service "BITS" -StartupType Disabled 
 Set-Service "BrokerInfrastructure" -StartupType Automatic 
 Set-Service "BFE" -StartupType Automatic 
 Set-Service "BDESVC" -StartupType Manual 
@@ -116,8 +120,8 @@ Set-Service "PhoneSvc" -StartupType Disabled
 Set-Service "PlugPlay" -StartupType Manual 
 Set-Service "PNRPAutoReg" -StartupType Manual 
 Set-Service "WPDBusEnum" -StartupType Manual 
-Set-Service "Power" -StartupType Automatic 
-Set-Service "Spooler" -StartupType Automatic 
+Set-Service "Power" -StartupType Manual 
+Set-Service "Spooler" -StartupType Disabled 
 Set-Service "PrintNotify" -StartupType Manual 
 Set-Service "PrintWorkflowUserSvc_?????" -StartupType Manual 
 Set-Service "wercplsupport" -StartupType Manual 
@@ -182,8 +186,8 @@ Set-Service "" -StartupType Manual
 Set-Service "TokenBroker" -StartupType Manual 
 Set-Service "WebClient" -StartupType Disabled 
 Set-Service "WFDSConSvc" -StartupType Disabled 
-Set-Service "AudioSrv" -StartupType Automatic 
-Set-Service "AudioEndpointBuilder" -StartupType Automatic 
+Set-Service "AudioSrv" -StartupType Manual 
+Set-Service "AudioEndpointBuilder" -StartupType Manual 
 Set-Service "SDRSVC" -StartupType Manual 
 Set-Service "WbioSrvc" -StartupType Manual 
 Set-Service "FrameServer" -StartupType Disabled 
@@ -221,7 +225,7 @@ Set-Service "WlanSvc" -StartupType Manual
 Set-Service "wmiApSrv" -StartupType Manual 
 Set-Service "LanmanWorkstation" -StartupType Automatic 
 Set-Service "WwanSvc" -StartupType Disabled 
-Set-Service "XboxGipSvc" -StartupType Manual 
+Set-Service "XboxGipSvc" -StartupType Disabled 
 Set-Service "xbgm" -StartupType Disabled 
 Set-Service "XblAuthManager" -StartupType Disabled 
 Set-Service "XblGameSave" -StartupType Disabled 
