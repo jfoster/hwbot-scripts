@@ -3,17 +3,27 @@ If (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]:
 	Exit
 }
 
+function IsNullOrWhiteSpace([string] $string) {
+    if ($string -ne $null) {
+        $string = $string.Trim()
+    }
+    return [string]::IsNullOrEmpty($string)
+}
+
 $volumes = Get-WmiObject -Class Win32_Volume
 [array]::Reverse($volumes)
 
 Foreach ($volume in $volumes) {
+    #Write-Host $volume.DeviceID
     $drive = $volume.DriveLetter
-    if (Test-Path $drive\Windows) {
-        bcdboot $drive\Windows /l en-gb
+    if (-Not (IsNullOrWhiteSpace($drive))) {
+        #Write-Output $drive
+        if (Test-Path $drive\Windows\System32\winload.efi) {
+            bcdboot $drive\Windows /v
+        }
     }
 }
-
+    
 bcdedit /set "{default}" bootmenupolicy legacy
-bcdedit
 
 cmd /c Pause | Out-Null
