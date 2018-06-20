@@ -1,3 +1,2 @@
-bcdedit.exe /set bootmenupolicy legacy
-
+bcdedit /set "{default}" bootmenupolicy legacy
 pause
