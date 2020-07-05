@@ -1,3 +1,0 @@
-sc delete asComSvc
-
-pause
